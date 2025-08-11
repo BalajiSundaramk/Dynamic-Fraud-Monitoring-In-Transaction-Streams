@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Fraud Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        .high-risk {
+            background-color: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+        .medium-risk {
+            background-color: #fff8e1;
+            border-left: 5px solid #ffc107;
+        }
+        .low-risk {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+        .risk-marker {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .risk-high { color: #f44336; }
+        .risk-medium { color: #ff9800; }
+        .risk-low { color: #4caf50; }
+        .risk-factors {
+            margin-top: 15px;
+        }
+        .factor {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .factor:before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            font-weight: bold;
+        }
+        .negative { color: #f44336; }
+        .positive { color: #4caf50; }
+        .neutral { color: #ff9800; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Real-Time Transaction Risk Analyzer</h1>
+        
+        <div class="form-group">
+            <label for="amount">Amount (₹)</label>
+            <input type="number" id="amount" placeholder="e.g. 5000">
+        </div>
+        
+        <div class="form-group">
+            <label for="location">Transaction Location</label>
+            <select id="location">
+                <option value="home">Home Location (Common)</option>
+                <option value="other_india">Other Indian City</option>
+                <option value="international">International</option>
+                <option value="high_risk">High-Risk Location</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="device">Device Type</label>
+            <select id="device">
+                <option value="recognized">Recognized Device</option>
+                <option value="new_but_same_city">New Device (Same City)</option>
+                <option value="new_diff_city">New Device (Different City)</option>
+                <option value="vpn">Using VPN/Tor</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="merchant">Merchant Type</label>
+            <select id="merchant">
+                <option value="trusted">Trusted Merchant</option>
+                <option value="new_trusted">New but Trusted Category</option>
+                <option value="new_unknown">New Unknown Merchant</option>
+                <option value="high_risk">High-Risk Category</option>
+            </select>
+        </div>
+
+        <button onclick="checkRisk()">Analyze Transaction Risk</button>
+        
+        <div id="result" class="result">
+            <h2>Risk Assessment</h2>
+            <p>Transaction ID: <span id="txnId">TX2023-</span></p>
+            <p>Risk Level: <span id="riskLevel" class="risk-marker"></span></p>
+            <p>Risk Score: <span id="riskScore"></span>/100</p>
+            <p>Time of Analysis: <span id="analysisTime"></span></p>
+            
+            <div class="risk-factors" id="riskFactors">
+                <!-- Factors will be inserted here -->
+            </div>
+            
+            <p id="recommendation"></p>
+        </div>
+    </div>
+
+    <script>
+        function checkRisk() {
+            // Get form values
+            const amount = parseInt(document.getElementById('amount').value) || 0;
+            const location = document.getElementById('location').value;
+            const device = document.getElementById('device').value;
+            const merchant = document.getElementById('merchant').value;
+            
+            // Get current device time
+            const currentTime = new Date();
+            const hours = currentTime.getHours();
+            const minutes = currentTime.getMinutes();
+            const time = (hours >= 2 && hours <= 5) ? "unusual" : "usual";  // 2AM to 5AM = Unusual time
+            
+            // Format the current time for display
+            const timeString = currentTime.toLocaleTimeString();
+            document.getElementById('analysisTime').textContent = timeString;
+
+            // Generate random transaction ID
+            const txnId = 'TX2023-' + Math.floor(Math.random() * 10000);
+            document.getElementById('txnId').textContent  = txnId;
+            
+            // Calculate risk score (0-100)
+            let riskScore = 0;
+            const factors = [];
+            
+            // Amount analysis
+            if (amount > 50000) {
+                riskScore += 30;
+                factors.push({text: "High amount (₹" + amount.toLocaleString('en-IN') + ") - Above normal threshold", type: "negative"});
+            } else if (amount > 20000) {
+                riskScore += 15;
+                factors.push({text: "Moderate amount (₹" + amount.toLocaleString('en-IN') + ") - Requires additional verification", type: "neutral"});
+            } else {
+                riskScore += 5;
+                factors.push({text: "Normal transaction amount (₹" + amount.toLocaleString('en-IN') + ")", type: "positive"});
+            }
+
+            // Location analysis
+            if (location === 'international') {
+                riskScore += 25;
+                factors.push({text: "International transaction - Higher fraud probability", type: "negative"});
+            } else if (location === 'high_risk') {
+                riskScore += 35;
+                factors.push({text: "High-risk location detected", type: "negative"});
+            } else if (location === 'other_india') {
+                riskScore += 10;
+                factors.push({text: "Different Indian city than usual", type: "neutral"});
+            } else {
+                riskScore += 2;
+                factors.push({text: "Transaction from usual location", type: "positive"});
+            }
+
+            // Device analysis
+            if (device === 'vpn') {
+                riskScore += 30;
+                factors.push({text: "VPN/Tor usage detected - Common in fraudulent transactions", type: "negative"});
+            } else if (device === 'new_diff_city') {
+                riskScore += 25;
+                factors.push({text: "New device from different city", type: "negative"});
+            } else if (device === 'new_but_same_city') {
+                riskScore += 15;
+                factors.push({text: "New device but same city", type: "neutral"});
+            } else {
+                riskScore += 3;
+                factors.push({text: "Recognized device", type: "positive"});
+            }
+
+            // Merchant analysis
+            if (merchant === 'high_risk') {
+                riskScore += 40;
+                factors.push({text: "High-risk merchant category", type: "negative"});
+            } else if (merchant === 'new_unknown') {
+                riskScore += 25;
+                factors.push({text: "First transaction with unknown merchant", type: "neutral"});
+            } else if (merchant === 'new_trusted') {
+                riskScore += 10;
+                factors.push({text: "New merchant in trusted category", type: "neutral"});
+            } else {
+                riskScore += 5;
+                factors.push({text: "Trusted merchant", type: "positive"});
+            }
+
+            // Time analysis (Automatically set based on device time)
+            if (time === 'unusual') {
+                riskScore += 20;
+                factors.push({text: "Unusual transaction time (2AM-5AM)", type: "negative"});
+            } else {
+                riskScore += 2;
+                factors.push({text: "Normal transaction time", type: "positive"});
+            }
+            
+            // Cap score at 100
+            riskScore = Math.min(100, riskScore);
+            
+            // Display results
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            document.getElementById('riskScore').textContent = riskScore;
+            
+            // Determine risk level
+            let riskLevel, riskClass, resultClass;
+            if (riskScore >= 70) {
+                riskLevel = "HIGH RISK";
+                riskClass = "risk-high";
+                resultClass = "high-risk";
+                recommendation = "Recommendation: Block transaction and flag account for review";
+            } else if (riskScore >= 40) {
+                riskLevel = "MEDIUM RISK";
+                riskClass = "risk-medium";
+                resultClass = "medium-risk";
+                recommendation = "Recommendation: Require additional authentication (OTP/Biometric)";
+            } else {
+                riskLevel = "LOW RISK";
+                riskClass = "risk-low";
+                resultClass = "low-risk";
+                recommendation = "Recommendation: Approve transaction";
+            }
+            
+            document.getElementById('riskLevel').textContent = riskLevel;
+            document.getElementById('riskLevel').className = "risk-marker " + riskClass;
+            resultDiv.className = "result " + resultClass;
+            document.getElementById('recommendation').textContent = recommendation;
+            
+            // Display risk factors
+            const factorsDiv = document.getElementById('riskFactors');
+            factorsDiv.innerHTML = '<h3>Risk Factors:</h3>';
+            
+            factors.forEach(factor => {
+                const factorElement = document.createElement('div');
+                factorElement.className = `factor ${factor.type}`;
+                factorElement.textContent = factor.text;
+                factorsDiv.appendChild(factorElement);
+            });
+            fetch('/api/transactions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: amount,
+                location: location,
+                device: device,
+                merchant: merchant,
+                riskScore: riskScore,
+                riskLevel: riskLevel,
+                //userId: userId // Get this from your session or hidden field
+            })
+        })
+    }
+    </script>
+</body>
+</html>

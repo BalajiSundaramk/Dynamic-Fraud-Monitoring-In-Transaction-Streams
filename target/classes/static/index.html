@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurePay | Real-time Fraud Detection for Online Transactions</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem 5%;
+        }
+        .feature-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">FraudBot</div>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="/trancheck">Transaction check</a>
+            <a href="#contact">Contact</a>
+            <a href="login.html" class="button">Login</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Advanced Fraud Detection for Your Online Transactions</h1>
+      <p>Real-time protection against payment fraud with our AI-powered detection system.</p>
+      <a href="/trancheck" class="button" style="background-color: var(--accent);">Check Transaction Risk</a>
+  </section>
+  
+
+    <section id="features" class="features">
+        <div class="feature-card">
+            <h3>Real-time Analysis</h3>
+            <p>Instant scoring of every transaction with millisecond latency</p>
+        </div>
+        <div class="feature-card">
+            <h3>Machine Learning Models</h3>
+            <p>Self-learning algorithms that improve with each transaction</p>
+        </div>
+        <div class="feature-card">
+            <h3>Device Fingerprinting</h3>
+            <p>Identify returning users and detect suspicious devices</p>
+        </div>
+        <div class="feature-card">
+            <h3>Behavioral Analysis</h3>
+            <p>Detect anomalies in user behavior patterns</p>
+        </div>
+        <div class="feature-card">
+            <h3>Global IP Analysis</h3>
+            <p>Identify high-risk locations and proxy/VPN usage</p>
+        </div>
+        <div class="feature-card">
+            <h3>Custom Rules Engine</h3>
+            <p>Create your own fraud detection rules tailored to your business</p>
+        </div>
+    </section>
+
+    <section id="how-it-works" style="padding: 3rem 5%; background-color: var(--light);">
+        <h2 style="text-align: center;">How Our Fraud Detection Works</h2>
+        <div style="display: flex; justify-content: center; margin-top: 2rem;">
+            <div style="max-width: 800px;">
+                <img src="/images/workflow-diagram.png" alt="Fraud detection workflow" style="width: 100%;">
+                <!-- Replace with actual diagram -->
+            </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem;">
+            <div>
+                <h4>1. Transaction Initiated</h4>
+                <p>Customer makes a purchase on your website</p>
+            </div>
+            <div>
+                <h4>2. Data Collection</h4>
+                <p>We gather 100+ data points about the transaction</p>
+            </div>
+            <div>
+                <h4>3. Risk Analysis</h4>
+                <p>AI models evaluate the transaction risk in real-time</p>
+            </div>
+            <div>
+                <h4>4. Decision</h4>
+                <p>Approve, reject, or flag for review based on risk score</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" style="padding: 3rem 5%; text-align: center;">
+        <h2>Simple, Transparent Pricing</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem;">
+            <div style="border: 1px solid #ddd; border-radius: 8px; padding: 2rem;">
+                <h3>Starter</h3>
+                <p><span style="font-size: 2rem;">$99</span>/month</p>
+                <p>Up to 1,000 transactions</p>
+                <p>Basic fraud detection</p>
+                <p>Email support</p>
+                <button>Choose Plan</button>
+            </div>
+            <div style="border: 1px solid #ddd; border-radius: 8px; padding: 2rem; border: 2px solid var(--accent);">
+                <h3>Professional</h3>
+                <p><span style="font-size: 2rem;">$299</span>/month</p>
+                <p>Up to 10,000 transactions</p>
+                <p>Advanced fraud detection</p>
+                <p>Custom rules</p>
+                <p>Priority support</p>
+                <button>Choose Plan</button>
+            </div>
+            <div style="border: 1px solid #ddd; border-radius: 8px; padding: 2rem;">
+                <h3>Enterprise</h3>
+                <p><span style="font-size: 2rem;">Custom</span></p>
+                <p>Unlimited transactions</p>
+                <p>All features included</p>
+                <p>Dedicated account manager</p>
+                <p>24/7 support</p>
+                <button>Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="padding: 3rem 5%; background-color: var(--light);">
+        <h2 style="text-align: center;">Contact Us</h2>
+        <div style="max-width: 600px; margin: 0 auto;">
+            <form>
+                <div style="margin-bottom: 1rem;">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" style="width: 100%; padding: 0.5rem;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" style="width: 100%; padding: 0.5rem;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="message">Message</label>
+                    <textarea id="message" style="width: 100%; padding: 0.5rem; height: 150px;"></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+            <div>
+                <h3>SecurePay</h3>
+                <p>Advanced fraud detection for e-commerce businesses</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <a href="#features" style="color: white; display: block;">Features</a>
+                <a href="#how-it-works" style="color: white; display: block;">How It Works</a>
+                <a href="#pricing" style="color: white; display: block;">Pricing</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>support@securepay.com</p>
+                <p>+1 (555) 123-4567</p>
+            </div>
+        </div>
+        <div style="margin-top: 2rem; border-top: 1px solid #555; padding-top: 1rem;">
+            <p>&copy; 2023 SecurePay. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

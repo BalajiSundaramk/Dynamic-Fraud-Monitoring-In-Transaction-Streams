@@ -1,0 +1,11 @@
+com\example\repository\TrancheckRepository.class
+com\example\controller\TrancheckController.class
+com\example\fraudchecker\controller\TransactionController.class
+com\example\fraudchecker\repository\TransactionRepository.class
+com\example\demo\repository\JpaRepository.class
+com\example\fraudchecker\PageController.class
+com\example\fraudchecker\FraudCheckerApplication.class
+com\example\service\TrancheckService.class
+com\example\fraudchecker\entity\Transaction.class
+com\example\fraudchecker\config\WebConfig.class
+com\example\model\TrancheckEntry.class

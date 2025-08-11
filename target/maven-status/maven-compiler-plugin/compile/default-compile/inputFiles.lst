@@ -1,0 +1,11 @@
+C:\fds\src\main\java\com\example\controller\TrancheckController.java
+C:\fds\src\main\java\com\example\demo\repository\JpaRepository.java
+C:\fds\src\main\java\com\example\fraudchecker\config\WebConfig.java
+C:\fds\src\main\java\com\example\fraudchecker\controller\TransactionController.java
+C:\fds\src\main\java\com\example\fraudchecker\entity\Transaction.java
+C:\fds\src\main\java\com\example\fraudchecker\FraudCheckerApplication.java
+C:\fds\src\main\java\com\example\fraudchecker\PageController.java
+C:\fds\src\main\java\com\example\fraudchecker\repository\TransactionRepository.java
+C:\fds\src\main\java\com\example\model\TrancheckEntry.java
+C:\fds\src\main\java\com\example\repository\TrancheckRepository.java
+C:\fds\src\main\java\com\example\service\TrancheckService.java
